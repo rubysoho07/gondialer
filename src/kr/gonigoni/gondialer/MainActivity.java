@@ -136,7 +136,24 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				txtCallCalc.setText(txtCallCalc.getText()+"0");
+				if (isCallMode)
+				{
+					txtCallCalc.setText(txtCallCalc.getText()+"0");
+				}
+				else
+				{
+					// 계산 모드일 때, 처음부터 0이 입력되는 것 방지
+					String str = txtCallCalc.getText().toString();
+					if(str.equals("") ||
+							str.charAt(str.length()-1) == '+' ||
+							str.charAt(str.length()-1) == '-' ||
+							str.charAt(str.length()-1) == '*' ||
+							str.charAt(str.length()-1) == '/')
+						return;
+					else
+						txtCallCalc.setText(txtCallCalc.getText()+"0");
+				}
+				
 			}
 		});
 		
