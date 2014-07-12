@@ -161,6 +161,13 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if(!isCallMode)			// when it's dialing mode,
+				{
+					// if expression is empty, return.
+					if(txtCallCalc.getText().toString().equals(""))
+						return;
+				}
+				
 				txtCallCalc.setText(txtCallCalc.getText()+"*");
 			}
 		});
@@ -201,7 +208,7 @@ public class MainActivity extends ActionBarActivity {
 				else
 				{
 					int calcres;
-					calcres = calc.getResult(txtCallCalc.getText().toString());
+					calcres = calc.getResult();
 					
 					Toast.makeText(getApplicationContext(), "Result : " + Integer.toString(calcres), Toast.LENGTH_SHORT).show();
 				}
@@ -221,7 +228,13 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(!isCallMode)
+				{
+					// if expression is empty, return.
+					if(txtCallCalc.getText().toString().equals(""))
+						return;
+					
 					txtCallCalc.setText(txtCallCalc.getText()+"+");
+				}
 			}
 		});
 		
@@ -230,7 +243,13 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(!isCallMode)
+				{
+					// if expression is empty, return.
+					if(txtCallCalc.getText().toString().equals(""))
+						return;
+					
 					txtCallCalc.setText(txtCallCalc.getText()+"-");
+				}
 			}
 		});
 		
@@ -239,7 +258,13 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(!isCallMode)
+				{
+					// if expression is empty, return.
+					if(txtCallCalc.getText().toString().equals(""))
+						return;
+					
 					txtCallCalc.setText(txtCallCalc.getText()+"/");
+				}
 			}
 		});
 		

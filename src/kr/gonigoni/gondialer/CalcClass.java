@@ -2,29 +2,64 @@ package kr.gonigoni.gondialer;
 
 import java.util.Stack;
 
-import android.widget.Toast;
-
 public class CalcClass {
 	
-	private Stack<Character> expression = new Stack<Character>();
+	private Stack<String> operand = new Stack<String>();
+	private Stack<String> expression = new Stack<String>();
 	private int result;
 	
 	public CalcClass()
 	{
+		// 초기화
+		operand.clear();
 		expression.clear();
 		result = 0;
 	}
 	
-	public int getResult(String originalExp)
+	/**
+	 * Initialize expression and operand stack.
+	 */
+	public void initialize()
 	{
-		//int i;
+		// 초기화
+		operand.clear();
+		expression.clear();
+		result = 0;
+	}
+	
+	/**
+	 * Convert string to postfix stack.
+	 * @param originalExp
+	 */
+	public void convertToPostfix(String originalExp)
+	{
+		int num_start = 0;
+		int num_end = 0;
+		int i;
 		
-		//expression.clear();		// clear stack
+		for(i = 0; i < originalExp.length(); i++)
+		{
+			switch(originalExp.charAt(i))
+			{
+				case '+':
+				case '-':
+				case '*':
+				case '/':
+					expression.add(originalExp.substring(num_start, num_end));
+					operand.add(Character.toString(originalExp.charAt(i)));
+					num_start = i+1;
+					num_end = num_start;
+					break;
+				default:
+					num_end++;
+			}
+		}
 		
-		//for(i = 0; i < originalExp.length(); i++)
-		//{
-		//	expression.push(originalExp.charAt(i));
-		//}
+	}
+	
+	public int getResult()
+	{
+		
 		return result;
 	}
 }
