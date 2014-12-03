@@ -63,7 +63,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText(txtCallCalc.getText()+"1");
 			}
 		});
@@ -71,7 +70,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText(txtCallCalc.getText()+"2");
 			}
 		});
@@ -79,7 +77,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn3.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText(txtCallCalc.getText()+"3");
 			}
 		});
@@ -87,7 +84,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn4.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText(txtCallCalc.getText()+"4");
 			}
 		});
@@ -95,7 +91,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn5.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText(txtCallCalc.getText()+"5");
 			}
 		});
@@ -103,7 +98,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn6.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText(txtCallCalc.getText()+"6");
 			}
 		});
@@ -111,7 +105,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn7.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText(txtCallCalc.getText()+"7");
 			}
 		});
@@ -119,7 +112,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn8.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText(txtCallCalc.getText()+"8");
 			}
 		});
@@ -127,7 +119,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn9.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText(txtCallCalc.getText()+"9");
 			}
 		});
@@ -135,7 +126,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtn0.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if (isCallMode)
 				{
 					txtCallCalc.setText(txtCallCalc.getText()+"0");
@@ -160,7 +150,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtnStar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(!isCallMode)			// when it's dialing mode,
 				{
 					// if expression is empty, return.
@@ -175,7 +164,6 @@ public class MainActivity extends ActionBarActivity {
 		callBtnSharp.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if (isCallMode)
 					txtCallCalc.setText(txtCallCalc.getText()+"#");
 			}
@@ -219,7 +207,6 @@ public class MainActivity extends ActionBarActivity {
 		clearBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				txtCallCalc.setText("");
 			}
 		});
@@ -227,7 +214,6 @@ public class MainActivity extends ActionBarActivity {
 		plusBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(!isCallMode)
 				{
 					// if expression is empty, return.
@@ -242,7 +228,6 @@ public class MainActivity extends ActionBarActivity {
 		minusBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(!isCallMode)
 				{
 					// if expression is empty, return.
@@ -257,7 +242,6 @@ public class MainActivity extends ActionBarActivity {
 		divideBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(!isCallMode)
 				{
 					// if expression is empty, return.
@@ -272,7 +256,6 @@ public class MainActivity extends ActionBarActivity {
 		togCalcCall.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if (togCalcCall.isChecked())
 				{
 					isCallMode = false;
