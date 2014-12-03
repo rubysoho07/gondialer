@@ -176,7 +176,8 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				txtCallCalc.setText(txtCallCalc.getText()+"#");
+				if (isCallMode)
+					txtCallCalc.setText(txtCallCalc.getText()+"#");
 			}
 		});
 		
