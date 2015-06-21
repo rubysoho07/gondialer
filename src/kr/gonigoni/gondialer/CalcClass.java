@@ -59,6 +59,7 @@ public class CalcClass {
 	
 	public int getResult()
 	{
+		
 		return result;
 	}
 }
