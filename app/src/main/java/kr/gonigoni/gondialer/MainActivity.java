@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +17,7 @@ import android.view.View.OnClickListener;
 public class MainActivity extends ActionBarActivity {
 
     private boolean isCallMode = true;
-    private CalcClass calc = new CalcClass();
+    private static CalcClass calc = new CalcClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,10 +181,10 @@ public class MainActivity extends ActionBarActivity {
                 }
                 else
                 {
-                    int calcResult;
-                    calcResult = calc.getResult();
+                    double calcResult;
+                    calcResult = calc.getResult(txtCallCalc.getText().toString());
 
-                    Toast.makeText(getApplicationContext(), "Result : " + Integer.toString(calcResult), Toast.LENGTH_SHORT).show();
+                    txtCallCalc.setText(Double.toString(calcResult));
                 }
             }
         });
