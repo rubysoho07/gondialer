@@ -20,6 +20,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private ToggleButton togCalcCall;
     private Button callBtn;
 
+    private boolean checkDuplicatedOperator (String s) {
+        char[] operator = {'+', '-', '*', '/'};
+
+        for (char ch : operator) {
+            if (ch == s.charAt(s.length()-1))
+                return true;
+        }
+
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,13 +154,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 if (txtCallCalc.getText().toString().length() == 0)
                     return;
 
-                if(isCallMode)
-                {
+                if(isCallMode) {
                     Intent in = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtCallCalc.getText().toString()));
                     startActivity(in);
-                }
-                else
-                {
+                } else {
                     double calcResult;
                     calcResult = calc.getResult(txtCallCalc.getText().toString());
 
@@ -172,33 +180,33 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 txtCallCalc.setText(original);
                 break;
             case R.id.button_divide:
-                if(!isCallMode)
-                {
+                if(!isCallMode) {
                     // if expression is empty, return.
                     if(txtCallCalc.getText().toString().equals(""))
                         return;
 
-                    txtCallCalc.setText(txtCallCalc.getText()+"/");
+                    if (!checkDuplicatedOperator(txtCallCalc.getText().toString()))
+                        txtCallCalc.setText(txtCallCalc.getText()+"/");
                 }
                 break;
             case R.id.button_minus:
-                if(!isCallMode)
-                {
+                if(!isCallMode) {
                     // if expression is empty, return.
                     if(txtCallCalc.getText().toString().equals(""))
                         return;
 
-                    txtCallCalc.setText(txtCallCalc.getText()+"-");
+                    if (!checkDuplicatedOperator(txtCallCalc.getText().toString()))
+                        txtCallCalc.setText(txtCallCalc.getText()+"-");
                 }
                 break;
             case R.id.button_plus:
-                if(!isCallMode)
-                {
+                if(!isCallMode) {
                     // if expression is empty, return.
                     if(txtCallCalc.getText().toString().equals(""))
                         return;
 
-                    txtCallCalc.setText(txtCallCalc.getText()+"+");
+                    if (!checkDuplicatedOperator(txtCallCalc.getText().toString()))
+                        txtCallCalc.setText(txtCallCalc.getText()+"+");
                 }
                 break;
             case R.id.button_sharp:
@@ -206,24 +214,23 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     txtCallCalc.setText(txtCallCalc.getText()+"#");
                 break;
             case R.id.button_star:
-                if(!isCallMode)			// when it's dialing mode,
-                {
+                // when it's dialing mode,
+                if(!isCallMode) {
                     // if expression is empty, return.
                     if(txtCallCalc.getText().toString().equals(""))
                         return;
-                }
 
-                txtCallCalc.setText(txtCallCalc.getText()+"*");
+                    if (!checkDuplicatedOperator(txtCallCalc.getText().toString()))
+                        txtCallCalc.setText(txtCallCalc.getText()+"*");
+                } else
+                    txtCallCalc.setText(txtCallCalc.getText()+"*");
                 break;
             case R.id.toggle_calc:
-                if (togCalcCall.isChecked())
-                {
+                if (togCalcCall.isChecked()) {
                     isCallMode = false;
                     callBtn.setText("=");
                     txtCallCalc.setText("");
-                }
-                else
-                {
+                } else {
                     isCallMode = true;
                     callBtn.setText("Call");
                     txtCallCalc.setText("");

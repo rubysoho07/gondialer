@@ -1,6 +1,6 @@
 package kr.gonigoni.gondialer;
 
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -176,7 +176,7 @@ public class CalcClass {
 		toPostfix(exp);
 
 		// 2-1. (For test) Print postfix expression.
-		printPostfix();
+		//printPostfix();
 
 		// 3. Get result from postfix expression.
 		while (!postExpList.isEmpty()) {
@@ -223,6 +223,7 @@ public class CalcClass {
 	}
 
 	// For test: Print postfix expression.
+	/*
 	public void printPostfix () {
 		Iterator<String> iterator = postExpList.iterator();
 		String tmp;
@@ -233,5 +234,5 @@ public class CalcClass {
 		}
 
 		System.out.println();
-	}
+	} */
 }
