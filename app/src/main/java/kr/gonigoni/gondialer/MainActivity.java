@@ -10,20 +10,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import android.view.View.OnClickListener;
 
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     private boolean isCallMode = true;
     private static CalcClass calc = new CalcClass();
+
+    private TextView txtCallCalc;
+    private ToggleButton togCalcCall;
+    private Button callBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView txtCallCalc = (TextView) findViewById(R.id.txtv_number);
+        txtCallCalc = (TextView) findViewById(R.id.txtv_number);
+
         // Buttons
         Button callBtn1 = (Button) findViewById(R.id.button1);
         Button callBtn2 = (Button) findViewById(R.id.button2);
@@ -38,222 +41,34 @@ public class MainActivity extends ActionBarActivity {
         Button callBtnStar = (Button) findViewById(R.id.button_star);
         Button callBtnSharp = (Button) findViewById(R.id.button_sharp);
         Button bkspBtn = (Button) findViewById(R.id.button_delete);
-        final Button callBtn = (Button) findViewById(R.id.button_call_equal);
+        callBtn = (Button) findViewById(R.id.button_call_equal);
         Button clearBtn = (Button) findViewById(R.id.button_clear);
         Button plusBtn = (Button) findViewById(R.id.button_plus);
         Button minusBtn = (Button) findViewById(R.id.button_minus);
         Button divideBtn = (Button) findViewById(R.id.button_divide);
-        final ToggleButton togCalcCall = (ToggleButton) findViewById(R.id.toggle_calc);
+        togCalcCall = (ToggleButton) findViewById(R.id.toggle_calc);
 
         // Event allocation
-        callBtn1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText(txtCallCalc.getText()+"1");
-            }
-        });
+        callBtn1.setOnClickListener(this);
+        callBtn2.setOnClickListener(this);
+        callBtn3.setOnClickListener(this);
+        callBtn4.setOnClickListener(this);
+        callBtn5.setOnClickListener(this);
+        callBtn6.setOnClickListener(this);
+        callBtn7.setOnClickListener(this);
+        callBtn8.setOnClickListener(this);
+        callBtn9.setOnClickListener(this);
+        callBtn0.setOnClickListener(this);
 
-        callBtn2.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText(txtCallCalc.getText()+"2");
-            }
-        });
-
-        callBtn3.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText(txtCallCalc.getText()+"3");
-            }
-        });
-
-        callBtn4.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText(txtCallCalc.getText()+"4");
-            }
-        });
-
-        callBtn5.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText(txtCallCalc.getText()+"5");
-            }
-        });
-
-        callBtn6.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText(txtCallCalc.getText()+"6");
-            }
-        });
-
-        callBtn7.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText(txtCallCalc.getText()+"7");
-            }
-        });
-
-        callBtn8.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText(txtCallCalc.getText()+"8");
-            }
-        });
-
-        callBtn9.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText(txtCallCalc.getText()+"9");
-            }
-        });
-
-        callBtn0.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isCallMode) {
-                    txtCallCalc.setText(txtCallCalc.getText()+"0");
-                } else {
-                    // 계산 모드일 때, 처음부터 0이 입력되는 것 방지
-                    String str = txtCallCalc.getText().toString();
-                    if(str.equals("") ||
-                            str.charAt(str.length()-1) == '+' ||
-                            str.charAt(str.length()-1) == '-' ||
-                            str.charAt(str.length()-1) == '*' ||
-                            str.charAt(str.length()-1) == '/')
-                        return;
-                    else
-                        txtCallCalc.setText(txtCallCalc.getText()+"0");
-                }
-            }
-        });
-
-        callBtnStar.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!isCallMode)			// when it's dialing mode,
-                {
-                    // if expression is empty, return.
-                    if(txtCallCalc.getText().toString().equals(""))
-                        return;
-                }
-
-                txtCallCalc.setText(txtCallCalc.getText()+"*");
-            }
-        });
-
-        callBtnSharp.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"#");
-            }
-        });
-
-        bkspBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String original = txtCallCalc.getText().toString();
-
-                if(original.length() == 0)
-                    return;
-
-                //Log.i("GonDialer", "(Before) Original: " + original + " Length: " + original.length());
-                original = original.substring(0, original.length()-1);
-                //Log.i("GonDialer", "(After) Original: " + original + " Length: " + original.length());
-
-                txtCallCalc.setText(original);
-            }
-        });
-
-        callBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (txtCallCalc.getText().toString().length() == 0)
-                    return;
-
-                if(isCallMode)
-                {
-                    Intent in = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtCallCalc.getText().toString()));
-                    startActivity(in);
-                }
-                else
-                {
-                    double calcResult;
-                    calcResult = calc.getResult(txtCallCalc.getText().toString());
-
-                    txtCallCalc.setText(Double.toString(calcResult));
-                }
-            }
-        });
-
-        clearBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtCallCalc.setText("");
-            }
-        });
-
-        plusBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!isCallMode)
-                {
-                    // if expression is empty, return.
-                    if(txtCallCalc.getText().toString().equals(""))
-                        return;
-
-                    txtCallCalc.setText(txtCallCalc.getText()+"+");
-                }
-            }
-        });
-
-        minusBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!isCallMode)
-                {
-                    // if expression is empty, return.
-                    if(txtCallCalc.getText().toString().equals(""))
-                        return;
-
-                    txtCallCalc.setText(txtCallCalc.getText()+"-");
-                }
-            }
-        });
-
-        divideBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!isCallMode)
-                {
-                    // if expression is empty, return.
-                    if(txtCallCalc.getText().toString().equals(""))
-                        return;
-
-                    txtCallCalc.setText(txtCallCalc.getText()+"/");
-                }
-            }
-        });
-
-        togCalcCall.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (togCalcCall.isChecked())
-                {
-                    isCallMode = false;
-                    callBtn.setText("=");
-                    txtCallCalc.setText("");
-                }
-                else
-                {
-                    isCallMode = true;
-                    callBtn.setText("Call");
-                    txtCallCalc.setText("");
-                }
-            }
-        });
+        callBtnStar.setOnClickListener(this);
+        callBtnSharp.setOnClickListener(this);
+        bkspBtn.setOnClickListener(this);
+        callBtn.setOnClickListener(this);
+        clearBtn.setOnClickListener(this);
+        plusBtn.setOnClickListener(this);
+        minusBtn.setOnClickListener(this);
+        divideBtn.setOnClickListener(this);
+        togCalcCall.setOnClickListener(this);
     }
 
     @Override
@@ -276,5 +91,144 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button0:
+                if (isCallMode) {
+                    txtCallCalc.setText(txtCallCalc.getText()+"0");
+                } else {
+                    // 계산 모드일 때, 처음부터 0이 입력되는 것 방지
+                    String str = txtCallCalc.getText().toString();
+                    if(str.equals("") ||
+                            str.charAt(str.length()-1) == '+' ||
+                            str.charAt(str.length()-1) == '-' ||
+                            str.charAt(str.length()-1) == '*' ||
+                            str.charAt(str.length()-1) == '/')
+                        return;
+                    else
+                        txtCallCalc.setText(txtCallCalc.getText()+"0");
+                }
+                break;
+            case R.id.button1:
+                txtCallCalc.setText(txtCallCalc.getText()+"1");
+                break;
+            case R.id.button2:
+                txtCallCalc.setText(txtCallCalc.getText()+"2");
+                break;
+            case R.id.button3:
+                txtCallCalc.setText(txtCallCalc.getText()+"3");
+                break;
+            case R.id.button4:
+                txtCallCalc.setText(txtCallCalc.getText()+"4");
+                break;
+            case R.id.button5:
+                txtCallCalc.setText(txtCallCalc.getText()+"5");
+                break;
+            case R.id.button6:
+                txtCallCalc.setText(txtCallCalc.getText()+"6");
+                break;
+            case R.id.button7:
+                txtCallCalc.setText(txtCallCalc.getText()+"7");
+                break;
+            case R.id.button8:
+                txtCallCalc.setText(txtCallCalc.getText()+"8");
+                break;
+            case R.id.button9:
+                txtCallCalc.setText(txtCallCalc.getText()+"9");
+                break;
+            case R.id.button_call_equal:
+                if (txtCallCalc.getText().toString().length() == 0)
+                    return;
+
+                if(isCallMode)
+                {
+                    Intent in = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtCallCalc.getText().toString()));
+                    startActivity(in);
+                }
+                else
+                {
+                    double calcResult;
+                    calcResult = calc.getResult(txtCallCalc.getText().toString());
+
+                    txtCallCalc.setText(Double.toString(calcResult));
+                }
+                break;
+            case R.id.button_clear:
+                txtCallCalc.setText("");
+                break;
+            case R.id.button_delete:
+                String original = txtCallCalc.getText().toString();
+
+                if(original.length() == 0)
+                    return;
+
+                //Log.i("GonDialer", "(Before) Original: " + original + " Length: " + original.length());
+                original = original.substring(0, original.length()-1);
+                //Log.i("GonDialer", "(After) Original: " + original + " Length: " + original.length());
+
+                txtCallCalc.setText(original);
+                break;
+            case R.id.button_divide:
+                if(!isCallMode)
+                {
+                    // if expression is empty, return.
+                    if(txtCallCalc.getText().toString().equals(""))
+                        return;
+
+                    txtCallCalc.setText(txtCallCalc.getText()+"/");
+                }
+                break;
+            case R.id.button_minus:
+                if(!isCallMode)
+                {
+                    // if expression is empty, return.
+                    if(txtCallCalc.getText().toString().equals(""))
+                        return;
+
+                    txtCallCalc.setText(txtCallCalc.getText()+"-");
+                }
+                break;
+            case R.id.button_plus:
+                if(!isCallMode)
+                {
+                    // if expression is empty, return.
+                    if(txtCallCalc.getText().toString().equals(""))
+                        return;
+
+                    txtCallCalc.setText(txtCallCalc.getText()+"+");
+                }
+                break;
+            case R.id.button_sharp:
+                if (isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"#");
+                break;
+            case R.id.button_star:
+                if(!isCallMode)			// when it's dialing mode,
+                {
+                    // if expression is empty, return.
+                    if(txtCallCalc.getText().toString().equals(""))
+                        return;
+                }
+
+                txtCallCalc.setText(txtCallCalc.getText()+"*");
+                break;
+            case R.id.toggle_calc:
+                if (togCalcCall.isChecked())
+                {
+                    isCallMode = false;
+                    callBtn.setText("=");
+                    txtCallCalc.setText("");
+                }
+                else
+                {
+                    isCallMode = true;
+                    callBtn.setText("Call");
+                    txtCallCalc.setText("");
+                }
+                break;
+        }
     }
 }
