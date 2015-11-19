@@ -19,6 +19,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private TextView txtCallCalc;
     private ToggleButton togCalcCall;
     private Button callBtn;
+    private Button callBtnSharp;
 
     private boolean checkDuplicatedOperator (String s) {
         char[] operator = {'+', '-', '*', '/'};
@@ -50,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Button callBtn9 = (Button) findViewById(R.id.button9);
         Button callBtn0 = (Button) findViewById(R.id.button0);
         Button callBtnStar = (Button) findViewById(R.id.button_star);
-        Button callBtnSharp = (Button) findViewById(R.id.button_sharp);
+        callBtnSharp = (Button) findViewById(R.id.button_sharp);
         Button bkspBtn = (Button) findViewById(R.id.button_delete);
         callBtn = (Button) findViewById(R.id.button_call_equal);
         Button clearBtn = (Button) findViewById(R.id.button_clear);
@@ -212,6 +213,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.button_sharp:
                 if (isCallMode)
                     txtCallCalc.setText(txtCallCalc.getText()+"#");
+                else {
+                    // 계산 모드로 바뀌면 소수점을 입력하도록 변경.
+                    // 계산 모드일 때, 처음부터 소수점이 입력되는 것 방지
+                    String str = txtCallCalc.getText().toString();
+                    if(str.equals("") ||
+                            str.charAt(str.length()-1) == '+' ||
+                            str.charAt(str.length()-1) == '-' ||
+                            str.charAt(str.length()-1) == '*' ||
+                            str.charAt(str.length()-1) == '/')
+                        return;
+                    else
+                        txtCallCalc.setText(txtCallCalc.getText()+".");
+                }
                 break;
             case R.id.button_star:
                 // when it's dialing mode,
@@ -229,10 +243,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 if (togCalcCall.isChecked()) {
                     isCallMode = false;
                     callBtn.setText("=");
+                    callBtnSharp.setText(".");
                     txtCallCalc.setText("");
                 } else {
                     isCallMode = true;
                     callBtn.setText("Call");
+                    callBtnSharp.setText("#");
                     txtCallCalc.setText("");
                 }
                 break;
