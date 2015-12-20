@@ -109,20 +109,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button0:
-                if (isCallMode) {
+                if (isCallMode)
                     txtCallCalc.setText(txtCallCalc.getText()+"0");
-                } else {
-                    // 계산 모드일 때, 처음부터 0이 입력되는 것 방지
-                    String str = txtCallCalc.getText().toString();
-                    if(str.equals("") ||
-                            str.charAt(str.length()-1) == '+' ||
-                            str.charAt(str.length()-1) == '-' ||
-                            str.charAt(str.length()-1) == '*' ||
-                            str.charAt(str.length()-1) == '/')
-                        return;
-                    else
-                        txtCallCalc.setText(txtCallCalc.getText()+"0");
-                }
                 break;
             case R.id.button1:
                 txtCallCalc.setText(txtCallCalc.getText()+"1");
