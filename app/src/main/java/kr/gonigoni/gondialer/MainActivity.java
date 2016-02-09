@@ -59,6 +59,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Button minusBtn = (Button) findViewById(R.id.button_minus);
         Button divideBtn = (Button) findViewById(R.id.button_divide);
         togCalcCall = (ToggleButton) findViewById(R.id.toggle_calc);
+        Button leftParentBtn = (Button) findViewById(R.id.button_leftparent);
+        Button rightParentBtn = (Button) findViewById(R.id.button_rightparent);
 
         // Event allocation
         callBtn1.setOnClickListener(this);
@@ -81,6 +83,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         minusBtn.setOnClickListener(this);
         divideBtn.setOnClickListener(this);
         togCalcCall.setOnClickListener(this);
+        leftParentBtn.setOnClickListener(this);
+        rightParentBtn.setOnClickListener(this);
     }
 
     @Override
@@ -109,8 +113,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button0:
-                if (isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"0");
+                txtCallCalc.setText(txtCallCalc.getText() + "0");
                 break;
             case R.id.button1:
                 txtCallCalc.setText(txtCallCalc.getText()+"1");
@@ -239,6 +242,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     callBtnSharp.setText("#");
                     txtCallCalc.setText("");
                 }
+                break;
+            case R.id.button_leftparent:
+                if (!isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"(");
+                break;
+            case R.id.button_rightparent:
+                if (!isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+")");
                 break;
         }
     }

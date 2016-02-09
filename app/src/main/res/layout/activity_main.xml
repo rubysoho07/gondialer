@@ -182,12 +182,26 @@
                 android:layout_weight="1"
                 android:text="@string/divide" />
 
+            <Button
+                android:id="@+id/button_leftparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/leftp" />
+
+            <Button
+                android:id="@+id/button_rightparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/rightp" />
+
             <ToggleButton
                 android:id="@+id/toggle_calc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textOn="calc"
+                android:textOn="cal"
                 android:textOff="tel"
                 />
 
