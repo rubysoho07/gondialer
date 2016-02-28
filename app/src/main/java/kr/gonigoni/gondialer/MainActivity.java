@@ -109,38 +109,63 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    private boolean checkInsertNumber(String str) {
+        /* If string length is zero */
+        if (str.length() == 0)
+            return true;
+
+        /* If last character is right parenthesis */
+        if (str.charAt(str.length()-1) == ')')
+            return false;
+
+        return true;
+    }
+
     @Override
     public void onClick(View v) {
+        String str = txtCallCalc.getText().toString();
+        boolean insertNumber = checkInsertNumber(str);
+
         switch (v.getId()) {
             case R.id.button0:
-                txtCallCalc.setText(txtCallCalc.getText() + "0");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"0");
                 break;
             case R.id.button1:
-                txtCallCalc.setText(txtCallCalc.getText()+"1");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"1");
                 break;
             case R.id.button2:
-                txtCallCalc.setText(txtCallCalc.getText()+"2");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"2");
                 break;
             case R.id.button3:
-                txtCallCalc.setText(txtCallCalc.getText()+"3");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"3");
                 break;
             case R.id.button4:
-                txtCallCalc.setText(txtCallCalc.getText()+"4");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"4");
                 break;
             case R.id.button5:
-                txtCallCalc.setText(txtCallCalc.getText()+"5");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"5");
                 break;
             case R.id.button6:
-                txtCallCalc.setText(txtCallCalc.getText()+"6");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"6");
                 break;
             case R.id.button7:
-                txtCallCalc.setText(txtCallCalc.getText()+"7");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"7");
                 break;
             case R.id.button8:
-                txtCallCalc.setText(txtCallCalc.getText()+"8");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"8");
                 break;
             case R.id.button9:
-                txtCallCalc.setText(txtCallCalc.getText()+"9");
+                if (insertNumber && !isCallMode)
+                    txtCallCalc.setText(txtCallCalc.getText()+"9");
                 break;
             case R.id.button_call_equal:
                 if (txtCallCalc.getText().toString().length() == 0)
@@ -207,7 +232,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 else {
                     // 계산 모드로 바뀌면 소수점을 입력하도록 변경.
                     // 계산 모드일 때, 처음부터 소수점이 입력되는 것 방지
-                    String str = txtCallCalc.getText().toString();
                     if(str.equals("") ||
                             str.charAt(str.length()-1) == '+' ||
                             str.charAt(str.length()-1) == '-' ||
@@ -244,12 +268,26 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 }
                 break;
             case R.id.button_leftparent:
-                if (!isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"(");
+                if (!isCallMode) {
+                    /* If last character is not operator,
+                        can't insert left parenthesis.
+                        (Also If string length is zero)*/
+                    if (str.length() == 0 ||
+                        str.charAt(str.length()-1) == '+' ||
+                        str.charAt(str.length()-1) == '-' ||
+                        str.charAt(str.length()-1) == '*' ||
+                        str.charAt(str.length()-1) == '/' ||
+                        str.charAt(str.length()-1) == '(')
+                        txtCallCalc.setText(txtCallCalc.getText() + "(");
+                }
                 break;
             case R.id.button_rightparent:
-                if (!isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+")");
+                if (!isCallMode) {
+                    /* If string length is not zero,
+                        you can insert right parenthesis. */
+                    if (str.length() != 0)
+                        txtCallCalc.setText(txtCallCalc.getText() + ")");
+                }
                 break;
         }
     }
