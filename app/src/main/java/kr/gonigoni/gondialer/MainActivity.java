@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private boolean isCallMode = true;
@@ -126,44 +128,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.button0:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"0");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num0)));
                 break;
             case R.id.button1:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"1");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num1)));
                 break;
             case R.id.button2:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"2");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num2)));
                 break;
             case R.id.button3:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"3");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num3)));
                 break;
             case R.id.button4:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"4");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num4)));
                 break;
             case R.id.button5:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"5");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num5)));
                 break;
             case R.id.button6:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"6");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num6)));
                 break;
             case R.id.button7:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"7");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num7)));
                 break;
             case R.id.button8:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"8");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num8)));
                 break;
             case R.id.button9:
-                if (insertNumber && !isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"9");
+                if (isCallMode || insertNumber)
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.num9)));
                 break;
             case R.id.button_call_equal:
                 if (txtCallCalc.getText().toString().length() == 0)
@@ -176,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     double calcResult;
                     calcResult = calc.getResult(txtCallCalc.getText().toString());
 
-                    txtCallCalc.setText(Double.toString(calcResult));
+                    txtCallCalc.setText(String.format(Locale.getDefault(), "%f", calcResult));
                 }
                 break;
             case R.id.button_clear:
@@ -201,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         return;
 
                     if (!checkDuplicatedOperator(txtCallCalc.getText().toString()))
-                        txtCallCalc.setText(txtCallCalc.getText()+"/");
+                        txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.divide)));
                 }
                 break;
             case R.id.button_minus:
@@ -211,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         return;
 
                     if (!checkDuplicatedOperator(txtCallCalc.getText().toString()))
-                        txtCallCalc.setText(txtCallCalc.getText()+"-");
+                        txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.minus)));
                 }
                 break;
             case R.id.button_plus:
@@ -221,12 +223,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         return;
 
                     if (!checkDuplicatedOperator(txtCallCalc.getText().toString()))
-                        txtCallCalc.setText(txtCallCalc.getText()+"+");
+                        txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.plus)));
                 }
                 break;
             case R.id.button_sharp:
                 if (isCallMode)
-                    txtCallCalc.setText(txtCallCalc.getText()+"#");
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.sharp)));
                 else {
                     // 계산 모드로 바뀌면 소수점을 입력하도록 변경.
                     // 계산 모드일 때, 처음부터 소수점이 입력되는 것 방지
@@ -237,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             str.charAt(str.length()-1) == '/')
                         return;
                     else
-                        txtCallCalc.setText(txtCallCalc.getText()+".");
+                        txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.dot)));
                 }
                 break;
             case R.id.button_star:
@@ -248,9 +250,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         return;
 
                     if (!checkDuplicatedOperator(txtCallCalc.getText().toString()))
-                        txtCallCalc.setText(txtCallCalc.getText()+"*");
+                        txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.multi)));
                 } else
-                    txtCallCalc.setText(txtCallCalc.getText()+"*");
+                    txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.multi)));
                 break;
             case R.id.toggle_calc:
                 if (togCalcCall.isChecked()) {
@@ -276,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         str.charAt(str.length()-1) == '*' ||
                         str.charAt(str.length()-1) == '/' ||
                         str.charAt(str.length()-1) == '(')
-                        txtCallCalc.setText(txtCallCalc.getText() + "(");
+                        txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.leftp)));
                 }
                 break;
             case R.id.button_rightparent:
@@ -284,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     /* If string length is not zero,
                         you can insert right parenthesis. */
                     if (str.length() != 0)
-                        txtCallCalc.setText(txtCallCalc.getText() + ")");
+                        txtCallCalc.setText(txtCallCalc.getText().toString().concat(getString(R.string.rightp)));
                 }
                 break;
         }
