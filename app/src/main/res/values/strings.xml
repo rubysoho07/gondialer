@@ -9,4 +9,5 @@
     <string name="divide">/</string>
     <string name="leftp">(</string>
     <string name="rightp">)</string>
+    <string name="calltxt">Call</string>
 </resources>

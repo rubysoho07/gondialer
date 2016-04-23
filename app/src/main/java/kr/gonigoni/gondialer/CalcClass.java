@@ -24,13 +24,13 @@ public class CalcClass {
 	private static int position;
 
 	// List for postfix expression.
-	private static LinkedList<String> postExpList = new LinkedList<String>();
+	private static LinkedList<String> postExpList = new LinkedList<>();
 
 	// Stack for making postfix expression.
-	private static Stack<Character> operatorStack = new Stack<Character>();
+	private static Stack<Character> operatorStack = new Stack<>();
 
 	// Stack for getting result from expression.
-	private static Stack<String> calcStack = new Stack<String>();
+	private static Stack<String> calcStack = new Stack<>();
 
 	// Check priority of operator.
 	private boolean isPrior (char operatorInStack, char operatorInToken) {
@@ -69,32 +69,26 @@ public class CalcClass {
 			token = Character.toString(exp.charAt(pos));
 			tokenType = TYPE_PLUS;
 			position++;
-			return;
 		} else if (exp.charAt(pos) == '-') {
 			token = Character.toString(exp.charAt(pos));
 			tokenType = TYPE_MINUS;
 			position++;
-			return;
 		} else if (exp.charAt(pos) == '*') {
 			token = Character.toString(exp.charAt(pos));
 			tokenType = TYPE_MULTIPLY;
 			position++;
-			return;
 		} else if (exp.charAt(pos) == '/') {
 			token = Character.toString(exp.charAt(pos));
 			tokenType = TYPE_DIVIDE;
 			position++;
-			return;
 		} else if (exp.charAt(pos) == '(') {
 			token = Character.toString(exp.charAt(pos));
 			tokenType = TYPE_LEFT_PARENTHESIS;
 			position++;
-			return;
 		} else if (exp.charAt(pos) == ')') {
 			token = Character.toString(exp.charAt(pos));
 			tokenType = TYPE_RIGHT_PARENTHESIS;
 			position++;
-			return;
 		} else {
 			while (pos < exp.length()) {
 				if (exp.charAt(pos) == '+' || exp.charAt(pos) == '-' ||
@@ -166,7 +160,7 @@ public class CalcClass {
 
 	// Get result from postfix expression.
 	public double getResult(String exp) {
-		double result = 0;
+		double result;
 		double t1, t2;
 
 		// 1. Clear all lists and stacks of this class.

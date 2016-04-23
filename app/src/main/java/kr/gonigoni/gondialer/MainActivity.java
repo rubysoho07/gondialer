@@ -2,8 +2,8 @@ package kr.gonigoni.gondialer;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private boolean isCallMode = true;
     private static CalcClass calc = new CalcClass();
@@ -115,10 +115,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             return true;
 
         /* If last character is right parenthesis */
-        if (str.charAt(str.length()-1) == ')')
-            return false;
+        return str.charAt(str.length() - 1) != ')';
 
-        return true;
     }
 
     @Override
@@ -262,7 +260,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     txtCallCalc.setText("");
                 } else {
                     isCallMode = true;
-                    callBtn.setText("Call");
+                    callBtn.setText(R.string.calltxt);
                     callBtnSharp.setText("#");
                     txtCallCalc.setText("");
                 }
